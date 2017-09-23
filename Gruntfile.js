@@ -72,7 +72,12 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      options: {
+        stdout: true,
+        stderr: true
+      },
       prodServer: {
+        command: 'git push live master'
       }
     },
   });
@@ -108,8 +113,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
-      console.log('we up in prod yo')
-    // git push live master ssh://root@ipaddress/var/repo/site.git
+      grunt.task.run([ 'shell' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
